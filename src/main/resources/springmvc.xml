@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/mvc
+ http://www.springframework.org/schema/mvc/spring-mvc.xsd
+ http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.liu" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="suffix" value=".jsp"></property>
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+    </bean>
+
+<!--    配置异常处理类-->
+    <bean id="myExceptionResolver" class="com.liu.exception.MyExceptionResolver"></bean>
+
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**" />
+            <!-- 配置不拦截请求的地址 -->
+            <mvc:exclude-mapping path="/index" />
+            <mvc:exclude-mapping path="/login" />
+            <bean class="com.liu.interceptor.LoginInterceptor" />
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**" />
+            <!-- 配置不拦截请求的地址 -->
+            <mvc:exclude-mapping path="/index" />
+            <mvc:exclude-mapping path="/login" />
+            <bean class="com.liu.interceptor.LoginInterceptor2" />
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
+    <!-- 设置静态资源不过滤 -->
+    <mvc:resources location="/static/css/" mapping="/static/css/**"/> <!-- 样式 -->
+    <mvc:resources location="/static/images/" mapping="/static/images/**"/> <!-- 图片 -->
+    <mvc:resources location="/static/js/" mapping="/static/js/**"/> <!-- javascript -->
+    <mvc:resources location="/static/fonts/" mapping="/static/fonts/**"/> <!-- javascript -->
+
+
+
+    <mvc:annotation-driven></mvc:annotation-driven>
+</beans>

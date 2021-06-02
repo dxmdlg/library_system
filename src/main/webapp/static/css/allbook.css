@@ -1,0 +1,39 @@
+.main-context {
+    margin-left:16%;
+    margin-top: 50px;
+    width: 84%;
+    background-color: #ecf0f5;
+    padding: 15px;
+    z-index: 800;
+    min-height: 88%;
+
+}
+
+.m-title {
+    position: relative;
+
+}
+
+.name-title {
+    font: 5em sans-serif;
+    font-weight: 700;
+    letter-spacing: 5px;
+}
+
+.show-table {
+    margin: 0 80px;
+    margin-top: 60px;
+    padding: 30px;
+    padding-bottom: 70px;
+    background-color: #fff;
+    font-size: 18px;
+}
+
+.page-nav {
+    float:right;
+}
+
+.footer {
+    margin-left: 230px;
+    padding: 15px;
+}

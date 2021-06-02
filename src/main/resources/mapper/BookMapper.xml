@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liu.mapper.BookMapper">
+
+    <select id="findAllBook" resultType="Book">
+        select * from book
+    </select>
+
+    <select id="findBookByBookName" parameterType="String" resultType="Book">
+        select * from book where bookName like #{bookName}
+    </select>
+
+    <select id="findBookByBookId" parameterType="Integer" resultType="Book">
+        select * from book where bookId like #{bookId}
+    </select>
+
+    <select id="findBookByAuthor" parameterType="String" resultType="Book">
+        select * from book where author like #{author}
+    </select>
+
+    <select id="findBookByPublisher" parameterType="String" resultType="Book">
+        select * from book where publisher like #{publisher}
+    </select>
+
+    <select id="findBookByType" parameterType="Integer" resultType="Book">
+        select * from book where type=#{type}
+    </select>
+
+    <update id="updateBook" parameterType="Book">
+        update book set bookName=#{bookName},author=#{author},publisher=#{publisher},totalNum=#{totalNum},surplusNum=#{surplusNum} where bookId=#{bookId}
+    </update>
+    
+    <insert id="saveBook" parameterType="Book">
+        insert into book(bookName,author,publisher,totalNum,surplusNum,type) values (#{bookName},#{author},#{publisher},#{totalNum},#{surplusNum},#{type})
+    </insert>
+
+    <delete id="deleteBook" parameterType="Integer">
+        delete from book where bookId=#{bookId}
+    </delete>
+</mapper>

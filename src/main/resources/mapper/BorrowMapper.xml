@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liu.mapper.BorrowMapper">
+
+    <insert id="saveBorrow" parameterType="Borrow">
+        insert into borrow(bookName,borrowTime,sReturnTime,uid,isReturn,tReturnTime)values (#{bookName},#{borrowTime},#{sReturnTime},#{uid},#{isReturn},#{tReturnTime})
+    </insert>
+
+    <select id="findBorrowByUid" parameterType="Integer" resultType="Borrow">
+        select * from borrow where uid=#{uid} and isReturn=0
+    </select>
+
+    <select id="findAllBorrowByUid" parameterType="Integer" resultType="Borrow">
+        select * from borrow where uid=#{uid}
+    </select>
+
+
+    <select id="findBorrowByBorrowId" parameterType="Integer" resultType="Borrow">
+        select * from borrow where borrowId=#{borrowId}
+    </select>
+
+    <update id="updateBorrow" parameterType="Borrow">
+        update borrow set isReturn=#{isReturn},sReturnTime=#{sReturnTime},tReturnTime=#{tReturnTime} where borrowId=#{borrowId}
+    </update>
+
+    <select id="findBorrowTimesByUid" resultType="Integer" parameterType="Integer">
+        SELECT COUNT(*) FROM borrow WHERE uid=#{uid}
+    </select>
+
+    <select id="findAllBorrow" resultType="Borrow">
+        select * from borrow
+    </select>
+
+</mapper>
